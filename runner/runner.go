@@ -12,7 +12,6 @@ func run() bool {
 	p := buildPath()
 	s := ee.GetString("run_args")
 	split := strings.Split(s, " ")
-	runnerLog(s)
 	cmd := exec.Command(p, split...)
 
 	stderr, err := cmd.StderrPipe()
