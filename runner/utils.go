@@ -1,6 +1,7 @@
 package runner
 
 import (
+	"github.com/qwenode/gogo/ee"
 	"os"
 	"path/filepath"
 	"strings"
@@ -29,7 +30,7 @@ func isIgnoredFolder(path string) bool {
 		return false
 	}
 
-	for _, e := range strings.Split(settings["ignored"], ",") {
+	for _, e := range strings.Split(ee.GetString("ignored"), ",") {
 		if strings.TrimSpace(e) == paths[0] {
 			return true
 		}
@@ -47,7 +48,7 @@ func isWatchedFile(path string) bool {
 
 	ext := filepath.Ext(path)
 
-	for _, e := range strings.Split(settings["valid_ext"], ",") {
+	for _, e := range strings.Split(ee.GetString("valid_ext"), ",") {
 		if strings.TrimSpace(e) == ext {
 			return true
 		}
@@ -57,7 +58,7 @@ func isWatchedFile(path string) bool {
 }
 
 func shouldRebuild(eventName string) bool {
-	for _, e := range strings.Split(settings["no_rebuild_ext"], ",") {
+	for _, e := range strings.Split(ee.GetString("no_rebuild_ext"), ",") {
 		e = strings.TrimSpace(e)
 		fileName := strings.Replace(strings.Split(eventName, ":")[0], `"`, "", -1)
 		if strings.HasSuffix(fileName, e) {

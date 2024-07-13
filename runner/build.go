@@ -1,6 +1,7 @@
 package runner
 
 import (
+	"github.com/qwenode/gogo/ee"
 	"io"
 	"io/ioutil"
 	"os"
@@ -10,7 +11,7 @@ import (
 func build() (string, bool) {
 	buildLog("Building...")
 
-	cmd := exec.Command("go", "build", "-o", buildPath(), root())
+	cmd := exec.Command("go", "build", "-o", buildPath(), ee.GetString("build_path"))
 
 	stderr, err := cmd.StderrPipe()
 	if err != nil {

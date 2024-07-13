@@ -1,14 +1,19 @@
 package runner
 
 import (
+	"github.com/qwenode/gogo/ee"
 	"io"
 	"os/exec"
+	"strings"
 )
 
 func run() bool {
-	runnerLog("Running...")
-
-	cmd := exec.Command(buildPath())
+	runnerLog("Running...卧槽")
+	p := buildPath()
+	s := ee.GetString("run_args")
+	split := strings.Split(s, " ")
+	runnerLog(s)
+	cmd := exec.Command(p, split...)
 
 	stderr, err := cmd.StderrPipe()
 	if err != nil {
