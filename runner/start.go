@@ -74,7 +74,8 @@ func start() {
 			}
 
 			started = true
-			mainLog(strings.Repeat("-", 20))
+			st := "\033[0;31m" + strings.Repeat("#", 40) + "START" + strings.Repeat("#", 40) + "\033[0m"
+			println(st)
 		}
 	}()
 }
